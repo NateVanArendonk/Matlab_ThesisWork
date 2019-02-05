@@ -1,0 +1,31 @@
+STEPS FOR INUNDATION ANALYSIS
+--------------------------------
+
+
+USING NEW REGION ANALYSIS CODE
+------------------------------
+1) Run Inundation_RegionAnalysis.py -- See comments in script for description of input and output
+2) Run createGDB_forSLR.py
+    - This resamples the output of inundation analysis to 5 meters and reprojects to web mercator for the website
+    - I usually ran all of the inundation analyses first, then batch processed multiple deltas with this script
+3) Run 'reclassDepthGrids.py' 
+    - This reclassifies the depth grids to 5 bins for the website
+
+
+
+
+USING OLD CONNECTIVITY CODE:
+---------------------------
+
+1) Run 'SLR_Connectivity_Blocks_Batch_Feb13.py'
+	- Will create ascii grids of inundation with water cells = 1 and dry cells = 0
+	
+2) Run 'Inundation_GridProcessing.py'
+	- Will create a geodatabase for output
+	- creates raster files from the Ascii Grid output from step 1
+	- Calculates the depths in the inundated areas based on the DEM and the height of water level at each datum
+	
+3) Run createGDB_forSLR.py
+    - This resamples the output of inundation analysis to 5 meters and reprojects to web mercator
+4) Run 'reclassDepthGrids.py' 
+    - This reclassifies the depth grids to 5 bins for the website
